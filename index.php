@@ -30,6 +30,36 @@
 </head>
 
 <body>
+
+	
+<?php
+$servername = "localhost";
+$username = "vadmin";
+$password = "sword"; 
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=venture_database", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully"; 
+    }
+catch(PDOException $e)
+    {
+    echo "Connection failed: " . $e->getMessage();
+    }
+?>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<H1>Venture</H1>
 	<p id="room_description">You find yourself sitting on the edge of a comforatble bed.<p> 
 	<input id="user_action" value="">
@@ -59,17 +89,7 @@ input.addEventListener("keyup", function(event) {
     document.getElementById("myBtn").click();
   }
 });
-
-
-
-
 </script>
-
-
-
-
-
-
 </html>
 
 
