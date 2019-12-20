@@ -18,13 +18,6 @@
   <meta name="og:image" content="https://html5boilerplate.com/icon.png">
 
   <meta name="theme-color" content="#E08524">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@h5bp">
-  <meta name="twitter:url" content="https://html5boilerplate.com/">
-  <meta name="twitter:title" content="HTML5 ★ BOILERPLATE">
-  <meta name="twitter:description" content="The web’s most popular front-end template which helps you build fast, robust, and adaptable web apps or sites.">
-  <meta name="twitter:image" content="https://html5boilerplate.com/icon.png">
-
   <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -32,22 +25,20 @@
 <body>
 
 	
-<?php
-$servername = "localhost";
-$username = "vadmin";
-$password = "sword"; 
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=venture_database", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully"; 
+  <?php
+    $servername = "localhost";
+    $username = "vadmin";
+    $password = "sword"; 
+    try {
+      $conn = new PDO("mysql:host=$servername;dbname=venture_database", $username, $password);
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      echo "Connected successfully"; 
     }
-catch(PDOException $e)
-    {
-    echo "Connection failed: " . $e->getMessage();
+    catch(PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
     }
-?>
+  ?>
 	
 	
 	
@@ -73,22 +64,39 @@ catch(PDOException $e)
 </body>
 
 <script>
-function resolve_action() {
-  var user_action = document.getElementById('user_action');
-  document.getElementById("room_description").innerHTML = user_action.value;
-  document.getElementById("user_action").value = ""; 
-};
+  /* 
+	resolve_action should parse the command and update the screen
+
+  */   
+  function resolve_action() {
+    var user_action = document.getElementById('user_action').value;
+    var space = user_action.indexOf(" ");
+    var count = user_action.length;
+    if (space != -1) {
+      var verb = user_action.slice(0, space);
+      var noun = user_action.slice(space + 1, count);
+    } else {
+      var verb = user_action;
+      var noun = "";
+    }; 
+
+    
+    
+    /* document.getElementById("room_description").innerHTML = user_action.value; */
+    document.getElementById("room_description").innerHTML = 'verb: ' + verb + '</br>noun: ' + noun + '</br>space: ' + space + '</br>count: ' + count;
+    document.getElementById("user_action").value = ""; 
+  };
 
 
 
-/* Capture the enter keypress   */
-var input = document.getElementById("user_action");
-input.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById("myBtn").click();
-  }
-});
+  /* Capture the enter keypress   */
+  var input = document.getElementById("user_action");
+  input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("myBtn").click();
+    }
+  });
 </script>
 </html>
 
