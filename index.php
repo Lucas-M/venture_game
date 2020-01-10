@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=fallback">
   <link rel="manifest" href="site.webmanifest">
 
-  <meta name="og:url" content="https://html5boilerplate.com/">
   <meta name="og:title" content="Venture">
   <meta name="og:type" content="website">
   <meta name="og:description" content="The web’s most popular front-end template which helps you build fast, robust, and adaptable web apps or sites.">
@@ -34,21 +33,44 @@
       // set the PDO error mode to exception
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       echo "Connected successfully"; 
+
+      $sql = 'SELECT name FROM Rooms ORDER BY name';
+      foreach ($conn->query($sql) as $row) {
+        echo '<p>';
+        echo $row['name'] . "\t";
+        echo '</p>';
+      }
     }
     catch(PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
+    
+?>
+
+
+
+	
+
+
+  <?php
+  /*
+    $servername = "localhost";
+    $username = "vadmin";
+    $password = "sword"; 
+    try {
+      $conn = new PDO("mysql:host=$servername;dbname=venture_database", $username, $password);
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      echo "Connected successfully"; 
+    }
+    catch(PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+    }
+ */
   ?>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
 	
 	
 	<H1>Venture</H1>
@@ -79,15 +101,11 @@
       var verb = user_action;
       var noun = "";
     }; 
-
-    
     
     /* document.getElementById("room_description").innerHTML = user_action.value; */
     document.getElementById("room_description").innerHTML = 'verb: ' + verb + '</br>noun: ' + noun + '</br>space: ' + space + '</br>count: ' + count;
     document.getElementById("user_action").value = ""; 
   };
-
-
 
   /* Capture the enter keypress   */
   var input = document.getElementById("user_action");
