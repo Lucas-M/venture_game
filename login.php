@@ -99,7 +99,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 <body>
-    <div class="wrapper">
+  <div class="">
+    <div class="row">
+      <div class="col-sm-4"></div>
+        <div class="col-sm-4">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -116,9 +119,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p>Don't have an account? <a href="user_register.php">Sign up now</a>.</p>
         </form>
+      </div>
     </div>
+  </div>
+
 </body>
 </html>
 

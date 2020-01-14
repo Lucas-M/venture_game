@@ -1,84 +1,71 @@
-<!doctype html>
-<html lang="en-us">
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
 
-<head>
-  <meta charset="utf-8">
-  <title>Venture</title>
-  <meta name="description" content="A traditional text adventure game.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=fallback">
-  <link rel="manifest" href="site.webmanifest">
+// Command Parser
+//
+// Assume look for now, such as look north or look n
 
-  <meta name="og:title" content="Venture">
-  <meta name="og:type" content="website">
-  <meta name="og:description" content="The web’s most popular front-end template which helps you build fast, robust, and adaptable web apps or sites.">
-  <meta name="og:image" content="https://html5boilerplate.com/icon.png">
+function parse_command($verb, $noun ){
+// Check verb for the look
 
-  <meta name="theme-color" content="#E08524">
-  <link rel="stylesheet" href="css/main.css">
+  // If look, parse dirction
+  
 
-</head>
+  // Seledt the direction description based on look and direction
+  //$sql = "SELECT n_description from rooms where room_id = 1";
 
-<body>
+  
+  // Return the output from the look to variable
+  return $verb + "test return" + $noun;
+  // Update the dom with the return
 
-	
-  <?php
-    $servername = "localhost";
-    $username = "vadmin";
-    $password = "sword"; 
-    try {
-      $conn = new PDO("mysql:host=$servername;dbname=venture_database", $username, $password);
-      // set the PDO error mode to exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully"; 
 
-      $sql = 'SELECT name FROM Rooms ORDER BY name';
-      foreach ($conn->query($sql) as $row) {
-        echo '<p>';
-        echo $row['name'] . "\t";
-        echo '</p>';
-      }
-    }
-    catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
-    }
-    
+}
+
+
 ?>
-
-
-
-	
-
-
-  <?php
-  /*
-    $servername = "localhost";
-    $username = "vadmin";
-    $password = "sword"; 
-    try {
-      $conn = new PDO("mysql:host=$servername;dbname=venture_database", $username, $password);
-      // set the PDO error mode to exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully"; 
-    }
-    catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
-    }
- */
-  ?>
-
-
-
-	
-	
-	<H1>Venture</H1>
-	<p id="room_description">You find yourself sitting on the edge of a comforatble bed.<p> 
-	<input id="user_action" value="">
-	<button id="myBtn" onclick="resolve_action()">Do</button>
-
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        body{ font: 14px sans-serif; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-3">User: <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b></div>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-3"><a href="logout.php"><button id="logout" class="btn">Logout</button></a></div>
+      </div>
+      <h1><b>Venture</b></h1>
+    </div>	
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+	  <input id="user_action" type="text" class="form-control" value="">
+	  <br>
+	  <br>
+	  <button id="myBtn" class="btn btn-primary" onclick="resolve_action()">Do</button>
+	  <br>
+	  <br>
+	  <p id="room_description">You find yourself sitting on the edge of a comforatble bed.<p> 
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
   <footer class="site-footer">
+    <a href="dev_notes.html"><button class="btn">Dev Notes</button></a>
   </footer>
 
   <script src="js/main.js"></script>

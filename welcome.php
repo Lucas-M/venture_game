@@ -24,12 +24,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to Venture.</h1>
     </div>
     <p>
-        <a href="index.php" class="btn btn-success">Go to Venture</a>
+        <a href="index.php" class="btn btn-success">Begin</a>
 	</br>
 	</br>
         <p>
-            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-            <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+            <a href="reset_password.php" class="btn btn-warning">Reset Your Password</a>
+	    <br>
+	    <br>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
 	</p>
     </p>
 </body>
