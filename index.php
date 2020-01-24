@@ -16,8 +16,7 @@ function parse_command($verb, $noun ){
 // Check verb for the look
 
   // If look, parse dirction
-  
-
+	//
   // Seledt the direction description based on look and direction
   //$sql = "SELECT n_description from rooms where room_id = 1";
 
@@ -25,11 +24,7 @@ function parse_command($verb, $noun ){
   // Return the output from the look to variable
   return $verb + "test return" + $noun;
   // Update the dom with the return
-
-
 }
-
-
 ?>
  
 <!DOCTYPE html>
@@ -82,7 +77,8 @@ function parse_command($verb, $noun ){
         document.getElementById("demo").innerHTML = this.responseText;
       }
     };
-    xhttp.open("GET", "ajax_info.txt", true);
+    //xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.open("GET", "look.php", true);
     xhttp.send();
   }
 
