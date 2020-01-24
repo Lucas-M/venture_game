@@ -64,8 +64,10 @@ function parse_command($verb, $noun ){
         </div>
         <div class="col-sm-3"></div>
       </div>
+    <p id="demo">Some Text</p>
+    <button type="button" onclick="loadDoc()">Change Content</button>
   <footer class="site-footer">
-    <a href="dev_notes.html"><button class="btn">Dev Notes</button></a>
+    <a href="dev_notes.php"><button class="btn">Dev Notes</button></a>
   </footer>
 
   <script src="js/main.js"></script>
@@ -73,9 +75,24 @@ function parse_command($verb, $noun ){
 </body>
 
 <script>
+  function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send();
+  }
+
+
+
+
+
+
   /* 
 	resolve_action should parse the command and update the screen
-
   */   
   function resolve_action() {
     var user_action = document.getElementById('user_action').value;
