@@ -55,21 +55,75 @@ function parse_command($verb, $noun ){
 	  <button id="myBtn" class="btn btn-primary" onclick="resolve_action()">Do</button>
 	  <br>
 	  <br>
+<!--
 	  <p id="room_description">You find yourself sitting on the edge of a comforatble bed.<p> 
+-->
         </div>
         <div class="col-sm-3"></div>
       </div>
-    <p id="demo">Some Text</p>
+    <p id="output_window">Type 1 word or 2</p>
+<!--
     <button type="button" onclick="loadDoc()">Change Content</button>
+-->
   <footer class="site-footer">
-    <a href="dev_notes.php"><button class="btn">Dev Notes</button></a>
+ <!--   <a href="dev_notes.php"><button class="btn">Dev Notes</button></a> -->
   </footer>
-
   <script src="js/main.js"></script>
-
 </body>
-
 <script>
+  /* 
+	resolve_action should parse the command and update the screen
+  */   
+  function resolve_action() {
+    var user_action = document.getElementById('user_action').value;
+    var space = user_action.indexOf(" ");
+    var count = user_action.length;
+    if (space != -1) {
+      var verb = user_action.slice(0, space);
+      var noun = user_action.slice(space + 1, count);
+    } else {
+      var verb = user_action;
+      var noun = "-1";
+    }; 
+    
+    /* document.getElementById("room_description").innerHTML = user_action.value; */
+//    document.getElementById("room_description").innerHTML = 'verb: ' + verb + '</br>noun: ' + noun + '</br>space: ' + space + '</br>count: ' + count;
+//    document.getElementById("user_action").value = ""; 
+
+    // New Code Here 2/4/2020
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("output_window").innerHTML = this.responseText;
+      }
+    };
+    //xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.open("GET", "resolve_action.php?verb="+verb+"&noun="+noun, true);
+    xhttp.send();
+
+
+
+
+
+
+
+
+
+
+
+    // New Code Here 2/4/2020
+
+  };
+
+  /* Capture the enter keypress   */
+  var input = document.getElementById("user_action");
+  input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("myBtn").click();
+    }
+  });
+
   function loadDoc() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -87,34 +141,8 @@ function parse_command($verb, $noun ){
 
 
 
-  /* 
-	resolve_action should parse the command and update the screen
-  */   
-  function resolve_action() {
-    var user_action = document.getElementById('user_action').value;
-    var space = user_action.indexOf(" ");
-    var count = user_action.length;
-    if (space != -1) {
-      var verb = user_action.slice(0, space);
-      var noun = user_action.slice(space + 1, count);
-    } else {
-      var verb = user_action;
-      var noun = "";
-    }; 
-    
-    /* document.getElementById("room_description").innerHTML = user_action.value; */
-    document.getElementById("room_description").innerHTML = 'verb: ' + verb + '</br>noun: ' + noun + '</br>space: ' + space + '</br>count: ' + count;
-    document.getElementById("user_action").value = ""; 
-  };
 
-  /* Capture the enter keypress   */
-  var input = document.getElementById("user_action");
-  input.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("myBtn").click();
-    }
-  });
+
 </script>
 </html>
 

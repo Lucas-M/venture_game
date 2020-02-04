@@ -22,6 +22,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <body>
   <h1>Dev Notes</h1>
     <p>Use ajax via JS to call server with query</p>
+    <p>Done, now flesh out the look function. Currently static at id = 1.</p>
+    <p>Query description where current id = room id</p>
   <br>
   <br>
   <a href="index.php"><button id="logout" class="btn">Back</button></a>
